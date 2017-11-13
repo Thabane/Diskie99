@@ -1,0 +1,33 @@
+<ion-header color="primary">
+    <ion-navbar color="primary">
+<button menuToggle>
+    <ion-icon name="menu" ></ion-icon>
+</button>
+<ion-title>Diskie 99</ion-title>
+    </ion-navbar>
+    <ion-toolbar  color="secondary">
+        <ion-title>My Teams</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <!-- <p>You are currently not following any teams<br>
+    Go to teams and choose a team you would like to follow</p> -->
+    <ion-list>
+        <ion-list-header>Followed Teams</ion-list-header>
+        <button ion-item  *ngFor="let item of favorites" (click)="favoriteTapped($event, item)">
+
+
+            <ion-icon name="star"></ion-icon>
+                {{item.team.name}}
+        </button>
+    </ion-list>
+
+
+    <p>To follow more teams, select a tournament,
+        then you can follow teams from their team page.
+    </p>
+    
+    <button ion-button color="primary" (click)="goToTeams()" outline >Teams</button>
+</ion-content>

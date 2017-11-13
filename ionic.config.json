@@ -2,5 +2,7 @@
   "name": "Diskie 99",
   "app_id": "f1588b7b",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

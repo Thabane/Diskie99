@@ -1,0 +1,16 @@
+<ion-header class="bar-energized">
+
+  <ion-navbar color="primary" class="bar-energized">
+    <ion-title>Teams</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-searchbar (ionInput)="searchTeam($event)" ngModule="searchTerm"></ion-searchbar>
+    <button ion-item *ngFor="let team of teams" (click)="itemTapped($event, team)">
+    <ion-icon name="football" item-start large></ion-icon> {{team.name}}
+  </button>
+
+</ion-content>
