@@ -1,5 +1,5 @@
 {
-  "name": "ionin-tabs-app",
+  "name": "MyApp",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -23,8 +23,10 @@
     "@ionic-native/core": "4.3.2",
     "@ionic-native/splash-screen": "4.3.2",
     "@ionic-native/status-bar": "4.3.2",
+    "@ionic/pro": "1.0.12",
     "@ionic/storage": "2.0.1",
     "ionic-angular": "3.8.0",
+    "lodash":"^4.2.0",
     "ionicons": "3.0.0",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
