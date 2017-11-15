@@ -48,10 +48,12 @@ export class MyApp {
   }
 
   goHome(){
-    this.nav.push(MyTeamsPage)
+    console.log('Home', MyTeamsPage);
+    this.nav.setRoot(MyTeamsPage)
   }
 
   goToTeams(){
-  this.nav.setRoot(TeamsPage)
+    console.log('teamsPage', TeamsPage);
+    this.nav.push(TeamsPage)
   }
 }

@@ -18,12 +18,14 @@ export class TeamDetailPage {
   team: any;
   games: any[];
   tempGames: any[];
+  teamStanding: {};
   private tournamentData: any;
   private tournament : any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, private apiService: ApiService) {
 
     this.team = this.navParams.data;
+    console.log('Team', this.team)
     this.tournament = this.apiService.getTournamentData()
       .subscribe(data => {
         this.tournamentData = data;
@@ -39,19 +41,18 @@ export class TeamDetailPage {
               gameId: g.id,
               opponent: opponentName,
               time: Date.parse(g.time),
-              locationUrl: g.locationUrl,
+              location: g.location,
               scoreDisplay: scoreDisplay,
               homeAway: (isTeam1 ? "vs." : "at")
             };
           })
           .value();
+          console.log(this.tournamentData);
+          
+          this.teamStanding = _.find(this.tournamentData.standings, { 'teamId': this.team.id });
 
         console.log(this.games);
       });
-    //this.tournamentData = this.apiService.getCurrentTournament();
-    console.log(this.tournamentData);
-
-
   }
 
   gameClicked($event, game) {

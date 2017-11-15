@@ -9,8 +9,8 @@
     <ion-list>
       <ion-list-header>Navigate</ion-list-header>
       <!-- <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">{{p.title}}</button> -->
-      <button color="primary" menuClose ion-item (click)="goHome">Home</button>
-      <button color="primary" menuClose ion-item (click)="goToTeams">Go To Teams</button>
+      <button (click)="goHome()" color="primary" menuClose ion-item >Home</button>
+      <button (click)="goToTeams()" color="primary" menuClose ion-item >Go To Teams</button>
   </ion-list>
   </ion-content>
 

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import { ApiService } from '../../shared/shared';
+import * as _ from 'lodash';
 
 /**
  * Generated class for the StandingsPage page.
@@ -14,10 +16,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class StandingsPage {
   team: any;
+  standings: any[];
+  allStandtings: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private apiService: ApiService) {
     this.team = this.navParams.data;
     console.log('***nav params:', this.navParams)
+
+    let tournamentData = this.apiService.getCurrentTournament();
+
+    this.standings = tournamentData.standings;
+    console.log(tournamentData);
+    
+    this.allStandtings = _.chain(this.standings)
+    .groupBy('division')
+    .toPairs()
+    .map(item => _.zipObject(['divisionName', 'divisionStandings'], item))
+    .value();
+
+    console.log('standings:', this.standings);
+    console.log('division  standings:', this.allStandtings);
   }
 
   ionViewDidLoad() {
