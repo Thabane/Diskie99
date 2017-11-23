@@ -21,7 +21,7 @@ export class TeamsPage {
     this.searchTerm = '';
     
     let loader = this.loadingController.create({
-      content: 'Getting Teams....',
+      content: 'Getting Teams....'
       // spinner: 'dots'
     });
     

@@ -6,33 +6,40 @@ import { ApiService } from '../../shared/shared';
 
 
 @Component({
-    templateUrl:'my-teams.page.html'
+    templateUrl: 'my-teams.page.html'
 })
-export class   MyTeamsPage{
+export class MyTeamsPage {
 
-    favorites = [ {
-        team: { id: 828, name: 'MADE Elite', coach: 'Johnson' },
-        tournamentId: '3dd50aaf-6b03-4497-b074-d81703f07ee8',
+    favorites = [{
+        team: { id: 798, name: 'MADE Elite', coach: 'Johnson' },
+        tournamentId: '98c6857e-b0d1-4295-b89e-2d95a45437f2',
         tournamentName: 'Diskie 99'
     },
     {
-        team: { id: 817, name: 'Sharks', coach: 'Smith' },
-        tournamentId: '3dd50aaf-6b03-4497-b074-d81703f07ee8',
+        team: { id: 797, name: 'Reisterstown Wolfpack', coach: 'Hightower' },
+        tournamentId: '98c6857e-b0d1-4295-b89e-2d95a45437f2',
         tournamentName: 'Diskie 99'
     }];
 
-    constructor(private nav: NavController, private loadingCtrl: LoadingController, private apiService: ApiService ){
+    constructor(private nav: NavController, private loadingCtrl: LoadingController, private apiService: ApiService) {
 
     }
 
-    goToTeams(){
-            this.nav.push(TeamsPage)
-    }
+    goToTeams() {
 
-    favoriteTapped($event, favorite){
         let loader = this.loadingCtrl.create({
-        content: 'Getting data...',
-        dismissOnPageChange: true
+            content: 'Getting data...',
+            dismissOnPageChange: true
+        });
+
+        loader.present();
+        this.nav.push(TeamsPage)
+    }
+
+    favoriteTapped($event, favorite) {
+        let loader = this.loadingCtrl.create({
+            content: 'Getting data...',
+            dismissOnPageChange: true
         });
 
         loader.present();

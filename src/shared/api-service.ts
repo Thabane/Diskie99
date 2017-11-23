@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class ApiService{
     private baseUrl = 'https://diskie-99.firebaseio.com/';
-    private teamUrl = 'https://diskie-99.firebaseio.com/tournaments-data/3dd50aaf-6b03-4497-b074-d81703f07ee8';
+    private teamUrl = 'https://diskie-99.firebaseio.com//tournaments-data/98c6857e-b0d1-4295-b89e-2d95a45437f2';
     currentTournament: any = {};
     constructor(private http: Http){
 
@@ -32,7 +32,7 @@ export class ApiService{
     }
 
     getTournamentData() : Observable<any> {
-        return this.http.get(`${this.baseUrl}/tournaments-data/3dd50aaf-6b03-4497-b074-d81703f07ee8.json`)
+        return this.http.get(`${this.baseUrl}/tournaments-data/98c6857e-b0d1-4295-b89e-2d95a45437f2.json`)
             .map((response: Response) => {
             this.currentTournament = response.json();
             return this.currentTournament;

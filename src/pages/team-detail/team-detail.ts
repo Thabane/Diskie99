@@ -64,7 +64,7 @@ export class TeamDetailPage {
 
     if (team1Score && team2Score) {
       var teamScore = (isTeam1 ? team1Score : team2Score);
-      var oppenentScore = (isTeam1 ? team1Score : team2Score);
+      var oppenentScore = (isTeam1 ? team2Score : team1Score);
       var winIndicator = teamScore > oppenentScore ? "W: " : "L: ";
       return winIndicator + teamScore + "-" + oppenentScore;
     }
