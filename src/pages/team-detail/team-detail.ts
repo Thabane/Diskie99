@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import { ApiService } from '../../shared/api-service';
 import { GamePage } from '../pages';
 /**
@@ -15,13 +16,16 @@ import { GamePage } from '../pages';
   templateUrl: 'team-detail.html',
 })
 export class TeamDetailPage {
+  allGames: any[];
+  dateFilter: string;
   team: any;
   games: any[];
   tempGames: any[];
   teamStanding: {};
   private tournamentData: any;
-  private tournament : any;
-  
+  private tournament: any;
+  useDateFilter = false;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private apiService: ApiService) {
 
     this.team = this.navParams.data;
@@ -47,9 +51,11 @@ export class TeamDetailPage {
             };
           })
           .value();
-          console.log(this.tournamentData);
-          
-          this.teamStanding = _.find(this.tournamentData.standings, { 'teamId': this.team.id });
+        console.log(this.tournamentData);
+
+        this.allGames = this.games;
+
+        this.teamStanding = _.find(this.tournamentData.standings, { 'teamId': this.team.id });
 
         console.log(this.games);
       });
@@ -58,9 +64,9 @@ export class TeamDetailPage {
   gameClicked($event, game) {
     let sourceGame = this.tournamentData.games.find(g => g.id === game.gameId);
     this.navCtrl.parent.parent.push(GamePage, sourceGame)
-    }
+  }
 
-  getScoreDisplay(isTeam1, team1Score, team2Score){
+  getScoreDisplay(isTeam1, team1Score, team2Score) {
 
     if (team1Score && team2Score) {
       var teamScore = (isTeam1 ? team1Score : team2Score);
@@ -82,7 +88,24 @@ export class TeamDetailPage {
 
   ionViewDidLoad() {
 
-     console.log('ionViewDidLoad TeamDetailPage');
+    console.log('ionViewDidLoad TeamDetailPage');
+  }
+
+  dateChanged() {
+    if (this.useDateFilter) {
+      this.games = _.filter(this.allGames, g => moment(g.time).isSame(this.dateFilter, 'day'));
+    } else {
+      this.games = this.allGames;
+    }
+  }
+
+  getScoreWorL(game) {
+    console.log(game);
+    return game.scoreDisplay ? game.scoreDisplay[0] : '';
+  }
+
+  getScoreDisplayBadge(game){
+    return game.scoreDisplay.indexOf('W:') == 0 ? 'badge-primary' : 'badge-danger';
   }
 
 }
