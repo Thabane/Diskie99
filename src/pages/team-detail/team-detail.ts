@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { ToastController, AlertController, NavController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { ApiService } from '../../shared/api-service';
 import { GamePage } from '../pages';
+import { UserSettings } from '../../shared/shared';
 /**
  * Generated class for the TeamDetailPage page.
  *
@@ -25,8 +26,10 @@ export class TeamDetailPage {
   private tournamentData: any;
   private tournament: any;
   useDateFilter = false;
+  isFollowing = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private apiService: ApiService) {
+  constructor(public navCtrl: NavController, private toastController: ToastController, public navParams: NavParams, private apiService: ApiService,
+    private alertController: AlertController, private userSettings: UserSettings) {
 
     this.team = this.navParams.data;
     console.log('Team', this.team)
@@ -56,7 +59,7 @@ export class TeamDetailPage {
         this.allGames = this.games;
 
         this.teamStanding = _.find(this.tournamentData.standings, { 'teamId': this.team.id });
-
+        this.userSettings.isFavoriteTeam(this.team.id).then(value => this.isFollowing = value);
         console.log(this.games);
       });
   }
@@ -104,8 +107,50 @@ export class TeamDetailPage {
     return game.scoreDisplay ? game.scoreDisplay[0] : '';
   }
 
-  getScoreDisplayBadge(game){
-    return game.scoreDisplay.indexOf('W:') == 0 ? 'badge-primary' : 'badge-danger';
+  getScoreDisplayBadge(game) {
+    return game.scoreDisplay.indexOf('W:') == 0 ? 'badge-md-primary' : 'badge-md-danger';
+  }
+
+  toggleFollow() {
+
+    if (this.isFollowing) {
+      let confirm = this.alertController.create({
+        title: 'Unfollow',
+        message: 'Are you sure you want to unfollow?',
+        buttons: [{
+          text: 'Yes',
+          handler: () => {
+            this.isFollowing = false;
+            this.userSettings.unforiteTeam(this.team);
+
+            let toast = this.toastController.create({
+              message: 'You have unfollowed this team.',
+              duration: 2000,
+              position: 'bottom'
+            });
+            toast.present();
+          }
+        },
+        {
+          text: 'No'
+        }]
+
+      });
+      confirm.present();
+    } else {
+      this.isFollowing = true;
+      this.userSettings.favoriteTeam(
+        this.team, 
+        this.tournamentData.tournament.id, 
+        this.tournamentData.tournament.name);
+    }
+  }
+
+  refreshAll(refresher){
+    this.apiService.refreshCurrentTournament().subscribe(() => {
+      refresher.complete();
+      this.ionViewDidLoad()
+    })
   }
 
 }

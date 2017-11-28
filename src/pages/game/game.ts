@@ -19,17 +19,29 @@ export class GamePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private apiService: ApiService) {
     this.game =this.navParams.data;
     console.log(this.game);
-    
+    this.game.gameTime = Date.parse(this.game.time);
   }
 
   ionViewLoad() {
 
   }
 
-  teamTapped(teamId){
+  teamTapped(teamId) {
     let tournamentData = this.apiService.getCurrentTournament();
     let team = tournamentData.teams.find(t => t.id === teamId);
     this.navCtrl.push(TeamHomePage, team);
+  }
+
+  goToDirections(){
+
+  }
+
+  goToMap(){
+
+  }
+
+  isWinner(score1, score2) {
+    return Number(score1) > Number(score2);
   }
 
 }

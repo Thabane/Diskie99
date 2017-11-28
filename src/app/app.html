@@ -12,6 +12,10 @@
       <button (click)="goHome()" color="primary" menuClose ion-item >Home</button>
       <button (click)="goToTeams()" color="primary" menuClose ion-item >Go To Teams</button>
   </ion-list>
+  <ion-list-header>Favorites</ion-list-header>
+  <button menuClose ion-item *ngFor="let fav of favoriteTeams" (click)="goToTeam(fav)">
+    {{fav.team.name}}
+  </button>
   </ion-content>
 
 </ion-menu>

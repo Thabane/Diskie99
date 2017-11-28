@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { TeamsPage, TeamHomePage } from '../pages';
-import { ApiService } from '../../shared/shared';
+import { ApiService, UserSettings } from '../../shared/shared';
 
 
 
@@ -10,19 +10,10 @@ import { ApiService } from '../../shared/shared';
 })
 export class MyTeamsPage {
 
-    favorites = [{
-        team: { id: 798, name: 'MADE Elite', coach: 'Johnson' },
-        tournamentId: '98c6857e-b0d1-4295-b89e-2d95a45437f2',
-        tournamentName: 'Diskie 99'
-    },
-    {
-        team: { id: 797, name: 'Reisterstown Wolfpack', coach: 'Hightower' },
-        tournamentId: '98c6857e-b0d1-4295-b89e-2d95a45437f2',
-        tournamentName: 'Diskie 99'
-    }];
+    favorites = [];
 
-    constructor(private nav: NavController, private loadingCtrl: LoadingController, private apiService: ApiService) {
-
+    constructor(private nav: NavController, private loadingCtrl: LoadingController, private apiService: ApiService, private useSettings: UserSettings) {
+       
     }
 
     goToTeams() {
@@ -43,7 +34,27 @@ export class MyTeamsPage {
         });
 
         loader.present();
-        this.apiService.getTournamentData().subscribe(t => this.nav.push(TeamHomePage, favorite.team))
+        // let tournament = this.apiService.getTournament().then(v => {
+        //     return v.tournament[0].id;
+        // });
+        // console.log(tournament);
+        this.apiService.getTournamentData(true).subscribe(t => this.nav.push(TeamHomePage, favorite.team))
 
     }
+
+    ionViewDidEnter() {
+        console.log('ionViewDidLoad My Teams');
+
+        let favoriteTeams = [];
+        this.favorites = [];
+        favoriteTeams = this.useSettings.getAllFavorites()
+
+        for (var i = 0; favoriteTeams.length > i; i++) {
+
+            this.favorites.push(JSON.parse(favoriteTeams[i]))
+        }
+        console.log(this.favorites);
+      }
+
+
 }

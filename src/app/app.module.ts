@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
+import { IonicStorageModule } from '@ionic/storage';
 import { MyTeamsPage, TeamsPage, TeamDetailPage, GamePage, TeamHomePage, StandingsPage} from '../pages/pages'
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -24,7 +24,11 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+         driverOrder: ['localstorage','indexeddb', 'sqlite', 'websql']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +44,9 @@ import { HttpModule } from '@angular/http';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, 
+      useClass: IonicErrorHandler
+    }
   ]
 })
 export class AppModule {}

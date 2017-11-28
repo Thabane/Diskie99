@@ -1,3 +1,9 @@
-page-game {
+$border-style: thin solid grey;
+.top-bottom-boder {
+    border-top: $border-style;
+    border-bottom: $border-style;
+}
 
+.divider-col {
+    border-right: $border-style;
 }
