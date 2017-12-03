@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ToastController, AlertController, NavController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -6,17 +6,17 @@ import { ApiService } from '../../shared/api-service';
 import { GamePage } from '../pages';
 import { UserSettings } from '../../shared/shared';
 /**
- * Generated class for the TeamDetailPage page.
+ * Generated class for the FixturesPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-team-detail',
-  templateUrl: 'team-detail.html',
+  selector: 'page-fixtures',
+  templateUrl: 'fixtures.html',
 })
-export class TeamDetailPage {
+export class FixturesPage {
   allGames: any[];
   dateFilter: string;
   team: any;
@@ -27,7 +27,8 @@ export class TeamDetailPage {
   private tournament: any;
   useDateFilter = false;
   isFollowing = false;
-
+  @ViewChild('datePicker') datePicker;
+  
   constructor(public navCtrl: NavController, private toastController: ToastController, public navParams: NavParams, private apiService: ApiService,
     private alertController: AlertController, private userSettings: UserSettings) {
 
@@ -39,28 +40,12 @@ export class TeamDetailPage {
         console.log(data)
 
         this.games = _.chain(this.tournamentData.games)
-        .filter(g => g.team1Score !== '' && g.team2Score !== '' && moment(g.time).isBefore(new Date(), 'day'))
-          // .map(g => {
-          //   let isTeam1 = (g.team1Id === this.team.id);
-          //   let opponentName = isTeam1 ? g.team2 : g.team1;
-          //   let scoreDisplay = this.getScoreDisplay(isTeam1, g.team1Score, g.team2Score);
-          //   return {
-          //     gameId: g.id,
-          //     opponent: opponentName,
-          //     time: Date.parse(g.time),
-          //     location: g.location,
-          //     scoreDisplay: scoreDisplay,
-          //     homeAway: (isTeam1 ? "vs." : "at")
-          //   };
-          // })
+        .filter(g => g.team1Score === '' && g.team2Score === '' && moment(g.time).isAfter(new Date(), 'day'))
           .value();
         console.log(this.tournamentData);
 
         this.allGames = this.games;
-
-        // this.teamStanding = _.find(this.tournamentData.standings, { 'teamId': this.team.id });
-        // this.userSettings.isFavoriteTeam(this.team.id).then(value => this.isFollowing = value);
-        console.log(this.games);
+        console.log(this.datePicker);
       });
   }
 
@@ -90,12 +75,12 @@ export class TeamDetailPage {
 
   ionViewDidLoad() {
 
-    console.log('ionViewDidLoad TeamDetailPage');
+    console.log('ionViewDidLoad FixturesPage');
   }
 
   dateChanged() {
     if (this.useDateFilter) {
-      this.games = _.filter(this.allGames, g => moment(g.time).isBefore(this.dateFilter, 'day'));
+      this.games = _.filter(this.allGames, g => moment(g.time).isAfter(this.dateFilter, 'day'));
     } else {
       this.games = this.allGames;
     }

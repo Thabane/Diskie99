@@ -33,13 +33,13 @@
   </ion-row>
   <ion-row baseline class="top-bottom-border">
     <ion-col text-center (click)="teamTapped(game.team1Id)">
-      <h1 [class.primary-color]="isWinner(game.team1Score, game.team2Score)">{{game.team1}}</h1>
+      <h1 [class.primary-color]="isWinner(game.team1Score, game.team2Score)">{{game.team1Score}}</h1>
     </ion-col>
     <ion-col text-center>
-      <ion-label>Score</ion-label>
+      <ion-label *ngIf="game.team1Score !== '' || game.team2Score !== ''">Score</ion-label>
     </ion-col>
     <ion-col text-center (click)="teamTapped(game.team2Id)">
-      <h1 [class.primary-color]="isWinner(game.team2Score, game.team1Score)">{{game.team2}}</h1>
+      <h1 [class.primary-color]="isWinner(game.team2Score, game.team1Score)">{{game.team2Score}}</h1>
     </ion-col>
   </ion-row>
 

@@ -30,23 +30,21 @@ export class StandingsPage {
     this.standings = tournamentData.standings;
     console.log(tournamentData);
     
-    // this.allStandtings = _.chain(this.standings)
-    // .groupBy('division')
-    // .toPairs()
-    // .map(item => _.zipObject(['divisionName', 'divisionStandings'], item))
-    // .value();
+    this.allStandtings = _.chain(this.standings)
+    .groupBy('group')
+    .toPairs()
+    .map(item => _.zipObject(['groupName', 'groupStandings'], item))
+    .value();
 
+    console.log('groups  standings:', this.allStandtings);
     console.log('standings:', this.standings);
-    // console.log('division  standings:', this.allStandtings);
-    this.allStandtings = tournamentData.standings;
+    for(var i = 0; this.allStandtings.length > i; i ++){
+      this.allStandtings[i].groupStandings = _.orderBy(this.allStandtings[i].groupStandings, ['pointsDiff'],['desc']);
+    }
     this.filterDivision();
   }
   filterDivision() {
-    if(this.divisionFilter === 'all'){
       this.standings = this.allStandtings;
-    } else {
-      this.standings = _.filter(this.allStandtings, s => s.division === this.team.division);
-    }
   }
 
   ionViewDidLoad() {
@@ -55,9 +53,8 @@ export class StandingsPage {
 
   getHeader(record, recordIndex, records){
     console.log(record);
-    if(recordIndex % 10 === 0 || record.division !== records[recordIndex -1].division){
-      return record.division;
-
+    if(recordIndex % 10 === 0 || record.group !== records[recordIndex -1].group){
+      return record.group;
     }
     return null;
   }

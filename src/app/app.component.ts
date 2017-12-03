@@ -9,6 +9,7 @@ import { ApiService } from '../shared/api-service';
 import { HttpModule } from '@angular/http'
 import { UserSettings } from '../shared/user-settings.service';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
+import { ResultsPage } from '../pages/results/results';
 
 @Component({
   templateUrl: 'app.html',
@@ -21,7 +22,7 @@ import { LoadingController } from 'ionic-angular/components/loading/loading-cont
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = MyTeamsPage;
+  rootPage: any = ResultsPage;
   favoriteTeams: any[];
 
   pages: Array<{ title: string, component: any }>;

@@ -9,6 +9,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
+import { ResultsPage } from '../pages/results/results';
+import { FixturesPage } from '../pages/Fixtures/fixtures';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { HttpModule } from '@angular/http';
     TeamsPage,
     GamePage,
     TeamHomePage,
-    StandingsPage
+    StandingsPage,
+    ResultsPage,
+    FixturesPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,9 @@ import { HttpModule } from '@angular/http';
     TabsPage,
     GamePage,
     TeamHomePage,
-    StandingsPage
+    StandingsPage,
+    ResultsPage,
+    FixturesPage
   ],
   providers: [
     StatusBar,

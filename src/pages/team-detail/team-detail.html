@@ -13,28 +13,15 @@
 
 
 <ion-content padding>
+  <h1>Results</h1>
   <ion-refresher (ionRefresh)="refreshAll($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-card>
     <ion-card-header></ion-card-header>
     <ion-card-content>
-      <ion-row>
-        <ion-col *ngIf="teamStanding" width-50>
-          <h2>Record: {{teamStanding.wins}} - {{teamStanding.losses}}</h2>
-          <p>Coach: {{team.coach}}</p>
-        </ion-col>
-        <ion-col width-50 text-right>
-          <button ion-button color="primary" outline (click)="toggleFollow()" *ngIf="!isFollowing">
-            <ion-icon name="star"></ion-icon>ADD FAVORITE
-          </button>
-          <button ion-button color="primary" (click)="toggleFollow()" *ngIf="isFollowing">
-            <ion-icon name="star"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
       <ion-item>
-        <ion-label>Date Filter:</ion-label>
+        <ion-label>Games Before:</ion-label>
         <ion-toggle [(ngModel)]="useDateFilter" (ionChange)="dateChanged()"></ion-toggle>
         <ion-datetime displayFormat="M/D/YYYY" pickerFormat="M/D/YYYY" [(ngModel)]="dateFilter" (ionChange)="dateChanged()" [(disabled)]="!useDateFilter"></ion-datetime>
       </ion-item>
@@ -44,18 +31,33 @@
   <ion-list>
     <ion-item *ngFor="let game of games" (click)="gameClicked($event, game)">
       <ion-row>
-        <ion-col width-20>
+        <ion-col col-auto>
           <p>{{game.time | date:'M/d/yy'}}</p>
           <p>{{game.time | date:'shortTime'}}</p>
         </ion-col>
-        <ion-col width-60>
-          <p>{{game.homeAway}} {{game.opponent}}</p>
-          <p>{{game.location}}</p>
+        <ion-col col-auto>
+          <p>{{game.team1}}
+            <b>({{game.team1Score}})</b>
+            <b>
+              <ion-badge *ngIf="game.team1Score > game.team2Score" ion-badge color="secondary" item-end>W</ion-badge>
+              <ion-badge *ngIf="game.team1Score < game.team2Score" ion-badge class="badge-md-danger">L</ion-badge>
+              <ion-badge *ngIf="game.team1Score === game.team2Score" ion-badge class="badge-md-warning">D</ion-badge>
+            </b>
+            <br> VS
+            <br> {{game.team2}}
+            <b>({{game.team2Score}})</b>
+            <b>
+                <ion-badge *ngIf="game.team1Score < game.team2Score" ion-badge color="secondary">W</ion-badge>
+                <ion-badge *ngIf="game.team1Score > game.team2Score" ion-badge class="badge-md-danger">L</ion-badge>
+                <ion-badge *ngIf="game.team1Score === game.team2Score" ion-badge class="badge-md-warning">D</ion-badge>
+              </b>
+          </p>
+          <p>At: {{game.location}}</p>
         </ion-col>
-        <ion-col width-20>
-          <h4>{{game.scoreDisplay}}</h4>
-          <ion-badge ion-badge color="primary" [class]="getScoreDisplayBadge(game)">{{getScoreWorL(game)}}</ion-badge>
-        </ion-col>
+        <!--  <ion-col width-20>
+        <h4>{{game.scoreDisplay}}</h4> -->
+        <!-- <ion-badge ion-badge color="primary" [class]="getScoreDisplayBadge(game)">{{getScoreWorL(game)}}</ion-badge>
+        </ion-col> -->
       </ion-row>
     </ion-item>
   </ion-list>
