@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ApiService } from '../../shared/shared';
 import * as _ from 'lodash';
-import { retry } from 'rxjs/operator/retry';
 
 /**
  * Generated class for the StandingsPage page.

@@ -66,13 +66,6 @@ export class FixturesPage {
     }
   }
 
-  // goHome(){
-  //   //  this.navCtrl.push(MyTeamsPage);
-  //   // this.navCtrl.popToRoot();
-  //   console.log('***parent :',this.navCtrl.parent);
-  //   this.navCtrl.parent.parent.popToRoot();
-  //  }
-
   ionViewDidLoad() {
 
     console.log('ionViewDidLoad FixturesPage');

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MyTeamsPage, TeamsPage, TeamDetailPage, GamePage} from '../pages'
+import { MyTeamsPage, TeamsPage, TeamDetailPage} from '../pages'
 
 @Component({
   templateUrl: 'tabs.html'

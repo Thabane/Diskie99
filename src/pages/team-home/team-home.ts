@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { LoadingController, NavController, NavParams } from 'ionic-angular';
-import { TeamDetailPage, StandingsPage, MyTeamsPage } from '../pages';
+import { NavController, NavParams } from 'ionic-angular';
+import { TeamDetailPage, StandingsPage } from '../pages';
 
 /**
  * Generated class for the TeamHomePage page.
@@ -18,7 +18,7 @@ export class TeamHomePage {
   teamDetailTab = TeamDetailPage;
   standingsTab = StandingsPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingController: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log('***nav params:', this.navParams)
     this.team = this.navParams.data;
    }

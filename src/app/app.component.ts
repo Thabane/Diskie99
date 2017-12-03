@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyTeamsPage, TeamsPage, TeamHomePage } from '../pages/pages'
 
-import { TabsPage } from '../pages/tabs/tabs';
+// import { TabsPage } from '../pages/tabs/tabs';
 import { ApiService } from '../shared/api-service';
 import { HttpModule } from '@angular/http'
 import { UserSettings } from '../shared/user-settings.service';

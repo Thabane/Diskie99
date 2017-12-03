@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { StandingsPage, TeamDetailPage } from '../pages';
 import { FixturesPage } from '../Fixtures/fixtures';
 
@@ -20,7 +20,7 @@ export class ResultsPage {
   standingsTab = StandingsPage;
   fixturesTab = FixturesPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private loadingController: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log('***nav params:', this.navParams)
     this.team = this.navParams.data;
    }

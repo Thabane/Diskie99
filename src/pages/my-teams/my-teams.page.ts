@@ -34,10 +34,6 @@ export class MyTeamsPage {
         });
 
         loader.present();
-        // let tournament = this.apiService.getTournament().then(v => {
-        //     return v.tournament[0].id;
-        // });
-        // console.log(tournament);
         this.apiService.getTournamentData(true).subscribe(t => this.nav.push(TeamHomePage, favorite.team))
 
     }
