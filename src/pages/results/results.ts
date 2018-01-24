@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { StandingsPage, TeamDetailPage } from '../pages';
-import { FixturesPage } from '../Fixtures/fixtures';
+import { FixturesPage } from '../fixtures/fixtures';
 
 /**
  * Generated class for the ResultsPage page.
