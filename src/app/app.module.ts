@@ -10,7 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 import { ResultsPage } from '../pages/results/results';
-import { FixturesPage } from '../pages/Fixtures/fixtures';
+import { FixturesPage } from '../pages/fixtures/fixtures';
 
 @NgModule({
   declarations: [
